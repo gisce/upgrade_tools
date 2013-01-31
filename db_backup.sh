@@ -1,8 +1,10 @@
 #!/bin/sh
+VERSION="2.25"
 for DBNAME in `psql -ltA | grep '|erp|' | cut -d '|' -f 1`; do
   echo "Dumping $DBNAME" && \
-  pg_dump $DBNAME > "/home/erp/var/backups/${DBNAME}/${DBNAME}_pre_2.25.sql" && \
+  mkdir -p /home/erp/var/backups/${DBNAME} && \
+  pg_dump $DBNAME > "/home/erp/var/backups/${DBNAME}/${DBNAME}_pre_${VERSION}.sql" && \
   echo "Bziping $DBNAME" && \
-  bzip2 "/home/erp/var/backups/${DBNAME}/${DBNAME}_pre_2.24.sql" && \
+  bzip2 "/home/erp/var/backups/${DBNAME}/${DBNAME}_pre_${VERSION}.sql" && \
   echo "$DBNAME backup done." &
 done
