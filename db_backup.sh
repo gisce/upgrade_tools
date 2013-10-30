@@ -1,5 +1,5 @@
 #!/bin/sh
-VERSION="2.28"
+VERSION="2.34.0"
 for DBNAME in `psql -ltA | grep '|erp|' | cut -d '|' -f 1`; do
   echo "Dumping $DBNAME" && \
   mkdir -p /home/erp/var/backups/${DBNAME} && \
